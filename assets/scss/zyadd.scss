@@ -1,0 +1,43 @@
+$defaultTagBackgrounds: #8a0, #e69, #06e, #fa0, #65e;
+
+/* Default article style */
+.article-list {
+
+    article {
+
+        &:hover {
+
+        }
+
+        .article-image {
+            img {
+
+            }
+        }
+
+        @for $i from 1 through length($defaultTagBackgrounds) {
+            &:nth-child(#{length($defaultTagBackgrounds)}n + #{$i}) {
+                .article-category a {
+                    background: nth($defaultTagBackgrounds, $i);
+                    color: nth($defaultTagColors, $i);
+                }
+            }
+        }
+    }
+}
+
+.related-content {
+    article {
+        @for $i from 1 through length($defaultTagBackgrounds) {
+            &:nth-child(#{length($defaultTagBackgrounds)}n + #{$i}) {
+                & {
+                    // background: nth($defaultTagBackgrounds, $i);
+                    background: darken(desaturate(nth($defaultTagBackgrounds, $i), 65%), 10%);
+                    .article-title{
+                        color: nth($defaultTagColors, $i);
+                    }
+                }
+            }
+        }
+    }
+}
