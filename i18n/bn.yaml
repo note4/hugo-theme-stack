@@ -32,6 +32,8 @@ article:
     readingTime:
         one: "{{ .Count }} মিনিটে পড়া যাবে"
         other: "{{ .Count }} মিনিটে পড়া যাবে"
+    
+    pageView: VIews
 
 notFound:
     title:

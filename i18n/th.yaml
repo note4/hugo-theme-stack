@@ -32,6 +32,8 @@ article:
     readingTime:
         one: "น่าจะใช้เวลา {{ .Count }} นาทีในการอ่าน"
         other: "น่าจะใช้เวลา {{ .Count }} นาทีในการอ่าน"
+    
+    pageView: VIews
 
 notFound:
     title:

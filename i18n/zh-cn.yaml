@@ -26,6 +26,8 @@ article:
 
     readingTime:
         other: "阅读时长: {{ .Count }} 分钟"
+    
+    pageView: 阅读
 
 notFound:
     title:

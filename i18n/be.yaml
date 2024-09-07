@@ -35,6 +35,8 @@ article:
 
     readingTime: 
         other: "Час чытання: {{ .Count }} хв."
+    
+    pageView: VIews
 
 notFound:
     title:

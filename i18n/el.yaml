@@ -33,6 +33,8 @@ article:
         one: "{{ .Count }} λεπτό ανάγνωσης"
         ### Seems that there's no need to add 's' even if it's plural in English
         other: "{{ .Count }} λεπτά ανάγνωσης"
+    
+    pageView: VIews
 
 notFound:
     title:

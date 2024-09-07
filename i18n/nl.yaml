@@ -23,6 +23,8 @@ article:
         other: Laatst bijgewerkt op
     readingTime:
         other: "{{ .Count }} leestijd"
+    
+    pageView: VIews
 
 notFound:
     title:

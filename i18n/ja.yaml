@@ -29,6 +29,8 @@ article:
 
     readingTime:
         other: "読了時間: {{ .Count }}分"
+    
+    pageView: VIews
 
 notFound:
     title:

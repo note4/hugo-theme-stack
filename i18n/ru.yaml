@@ -31,6 +31,8 @@ article:
         other: Содержание
     readingTime: 
         other: "Время чтения: {{ .Count }} мин."
+    
+    pageView: VIews
 
 notFound:
     title:

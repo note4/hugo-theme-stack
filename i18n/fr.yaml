@@ -32,6 +32,8 @@ article:
     readingTime:
         one: "{{ .Count }} minute de lecture"
         other: "{{ .Count }} minutes de lecture"
+    
+    pageView: VIews
 
 notFound:
     title:

@@ -32,6 +32,8 @@ article:
     readingTime:
         one: "{{ .Count }} 분 정도"
         other: "{{ .Count }} 분 정도"
+    
+    pageView: VIews
 
 notFound:
     title:

@@ -38,6 +38,8 @@ article:
         few: "Przeczytasz w {{ .Count }} minuty"
         many: "Przeczytasz w {{ .Count }} minut"
         other: "Przeczytasz w {{ .Count }} minut"
+    
+    pageView: VIews
 
 notFound:
     title:
