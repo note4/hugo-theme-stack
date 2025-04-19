@@ -1,0 +1,59 @@
+$defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
+
+/* Default article style */
+.article-list {
+
+    article {
+
+        &:hover {
+
+        }
+
+        .article-image {
+            img {
+
+            }
+        }
+
+        @for $i from 1 through length($defaultTagBackgrounds) {
+            &:nth-child(#{length($defaultTagBackgrounds)}n + #{$i}) {
+                .article-category a {
+                    background: nth($defaultTagBackgrounds, $i);
+                    color: nth($defaultTagColors, $i);
+                }
+            }
+        }
+    }
+}
+
+.related-content {
+    article {
+        @for $i from 1 through length($defaultTagBackgrounds) {
+            &:nth-child(#{length($defaultTagBackgrounds)}n + #{$i}) {
+                & {
+                    // background: nth($defaultTagBackgrounds, $i);
+                    background: darken(desaturate(nth($defaultTagBackgrounds, $i), 65%), 10%);
+                    .article-title{
+                        color: nth($defaultTagColors, $i);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+/* 临时处理 */
+/*手机访问显示右边栏*/
+.container .right-sidebar{display: flex;}
+/*友链*/
+.friend-links{margin-block-start: 0; margin-block-end: 0; padding-inline-start: 0; list-style: none; flex-wrap: nowrap; flex-direction: column;}
+.friend-links li{display: inline-flex;}
+/*交互优化*/
+.tagCloud-tags a:hover,
+.article-title a:hover,
+.article-list article .article-category a:hover,
+.related-content article:hover{filter: contrast(150%) hue-rotate(100deg);}
+/* .article-title a:hover{color: #f80;} */
+/* .tagCloud-tags a:hover{background-color: #06e;} */
+/* .friend-links a:hover{background-color: #8a0;} */
