@@ -10,6 +10,7 @@
         {{ range first $limit $context.Site.Taxonomies.categories.ByCount }}
             <a href="{{ .Page.RelPermalink }}" class="font_size_{{ .Count }}">
                 {{ .Page.Title }}
+                <sup>{{ .Count }}</sup>
             </a>
         {{ end }}
     </div>
