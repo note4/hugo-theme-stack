@@ -3,7 +3,12 @@
 
 {{- $description := partialCached "data/description" . .RelPermalink -}}
 <meta name='description' {{ printf "content=%q" $description | safeHTMLAttr }}>
-{{ with .Params.Keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end }}
+{{/** with .Params.Keywords }}<meta name="keywords" content="{{ delimit . ", " }}">{{ end **/}}
+{{ if .IsHome }}
+    {{- with .Site.Params.Keywords -}}<meta name="keywords" content="{{ delimit . ", " }}">{{- end }}
+{{- else -}}
+    {{- with .Params.Keywords -}}<meta name="keywords" content="{{ delimit . ", " }}">{{- else -}} {{- with .Params.Tags -}}<meta name="keywords" content="{{ delimit . ", " }}">{{- end -}} {{- end -}}
+{{ end }}
 
 {{- $title := partial "data/title" . -}}
 <title>{{ $title }}</title>
