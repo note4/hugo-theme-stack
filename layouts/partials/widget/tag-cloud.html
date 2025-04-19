@@ -10,7 +10,12 @@
         {{ range first $limit $context.Site.Taxonomies.tags.ByCount }}
             <a href="{{ .Page.RelPermalink }}" class="font_size_{{ .Count }}">
                 {{ .Page.Title }}
+                <sup>{{ .Count }}</sup>
             </a>
         {{ end }}
+        <a href="/tags/">
+            查看更多
+            <sup>→</sup>
+        </a>
     </div>
 </section>
