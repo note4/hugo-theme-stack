@@ -1,0 +1,24 @@
+{{ if and .Context.IsHome (eq .Context.Paginator.PageNumber 1) }}
+<div class="widget friend-links tagCloud">
+  <div class="widget-icon">
+    {{ partial "helper/icon" "link" }}
+  </div>
+  <h2 class="widget-title section-title">{{ T "custom.links.title" }}</h2>
+  <ul class="tagCloud-tags friend-links">
+    {{ range site.Data.friend_links }}
+      {{ if and 
+        .status 
+        (or (eq .show_page "home_page") (eq .show_page "all_page")) 
+        (eq .language site.Language.Lang) 
+      }}
+        <li class="article-category">
+          <a href="{{ .url }}" title="{{ .description }}" target="_blank" rel="noopener" class="link">
+            {{ .name }}
+          </a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+</div>
+{{ else }}
+{{ end }}
