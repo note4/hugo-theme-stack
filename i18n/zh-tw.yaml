@@ -32,6 +32,8 @@ article:
     readingTime:
         one: "閱讀時間: {{ .Count }} 分鐘"
         other: "閱讀時間: {{ .Count }} 分鐘"
+    
+    pageView: 閱讀
 
 notFound:
     title:

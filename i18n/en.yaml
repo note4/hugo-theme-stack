@@ -32,6 +32,8 @@ article:
     readingTime:
         one: "{{ .Count }} minute read"
         other: "{{ .Count }} minute read"
+    
+    pageView: VIews
 
 notFound:
     title:
@@ -51,6 +53,7 @@ widget:
     tagCloud:
         title:
             other: Tags
+
     categoriesCloud:
         title:
             other: Categories
@@ -71,3 +74,7 @@ footer:
 
     designedBy:
         other: Theme {{ .Theme }} designed by {{ .DesignedBy }}
+        
+    links:
+        title:
+            other: Friends Links

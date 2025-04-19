@@ -45,6 +45,15 @@
                 </time>
             </div>
         {{ end }}
+
+        {{ if and (eq .Site.Params.comments.enabled true) (eq .Site.Params.comments.provider "waline") (eq .Site.Params.comments.waline.pageview true) }}
+            <div>
+                {{ partial "helper/icon" "user" }}
+                <span class="article-pageview">
+                    <span class="waline-pageview-count" data-path="{{ .RelPermalink }}">*</span> {{ T "article.pageView" }}
+                </span>
+            </div>
+        {{ end }}
     </footer>
     {{ end }}
 

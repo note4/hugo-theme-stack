@@ -26,6 +26,8 @@ article:
 
     readingTime:
         other: "阅读时长: {{ .Count }} 分钟"
+    
+    pageView: 阅读
 
 notFound:
     title:
@@ -65,3 +67,8 @@ footer:
 
     designedBy:
         other: 主题 {{ .Theme }} 由 {{ .DesignedBy }} 设计
+        
+custom:
+    links:
+        title:
+            other: 友链

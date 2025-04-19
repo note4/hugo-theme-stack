@@ -10,3 +10,16 @@
     {{- $customScript := . | js.Build $opts | fingerprint -}}
     <script type="text/javascript" src="{{ $customScript.RelPermalink }}" defer></script>
 {{- end -}}
+
+
+
+{{ if and (eq .Site.Params.comments.enabled true) (eq .Site.Params.comments.provider "waline") (eq .Site.Params.comments.waline.pageview true) }}
+<script type="module">
+    import { pageviewCount } from 'https://unpkg.com/@waline/client@v3/dist/pageview.js';
+  
+    pageviewCount({
+      serverURL: '{{ .Site.Params.comments.Waline.serverURL }}',
+      path: window.location.pathname,
+    });
+  </script>
+{{ end }}
