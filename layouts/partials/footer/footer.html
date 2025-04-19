@@ -5,7 +5,8 @@
         {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
             {{ .Site.Params.footer.since }} - 
         {{ end }}
-        {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
+        {{ now.Format "2006" }} {{ replace site.Copyright "[site_title]" (printf "<a href='%s'>%s</a>" site.BaseURL site.Title) | safeHTML }} 
+        <small>{{ T "article.lastUpdatedOn" }} <time>{{ now | time.Format "2006-01-02 15:04" }}</time></small>
     </section>
     
     <section class="powerby">
@@ -13,11 +14,13 @@
             {{ . | safeHTML }} <br/>
         {{ end }}
 
-        {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>` -}}
-        {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
-        {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>` -}}
-
-        {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
-        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}
+        {{ if or (not .Site.Params.footerPoweredByOnlyHome) (and .IsHome (eq .Paginator.PageNumber 1)) }}
+            {{- $Generator := `<a href="https://gohugo.io/" target="_blank" rel="nofollow ugc noopener">Hugo</a>` -}}
+            {{- $Theme := printf `<a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="nofollow ugc noopener" data-version="%s">Stack</a>` $ThemeVersion -}}
+            {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="nofollow ugc noopener">Jimmy</a>` -}}
+            {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }}, 
+            {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}.
+        {{ end }}
+        
     </section>
 </footer>
