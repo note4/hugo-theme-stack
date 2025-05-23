@@ -13,9 +13,17 @@
                 <sup>{{ .Count }}</sup>
             </a>
         {{ end }}
-        <a href="/tags/">
-            查看更多
-            <sup>→</sup>
-        </a>
+
+        {{ $tagsPage := .Site.GetPage "taxonomyTerm" "tags" }}
+        {{ if $tagsPage }}
+            <a href="{{ $tagsPage.RelPermalink }}">
+            {{ i18n "widget.tagCloud.more" | default "More" }} <sup>→</sup>
+            </a>
+        {{ else }}
+            <a href="{{ "/tags/" | relLangURL }}">
+            {{ i18n "widget.tagCloud.more" | default "More" }} <sup>→</sup>
+            </a>
+        {{ end }}
+
     </div>
 </section>
