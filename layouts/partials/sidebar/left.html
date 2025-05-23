@@ -32,7 +32,7 @@
         {{ end }}
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a></h1>
+            <h1 class="site-name"><a href="{{ "/" | relLangURL }}">{{ .Site.Title }}</a></h1>
             <h2 class="site-description">{{ .Site.Params.sidebar.subtitle }}</h2>
         </div>
     </header>
@@ -92,8 +92,12 @@
 
                 {{ if (default false .Site.Params.colorScheme.toggle) }}
                     <li id="dark-mode-toggle">
-                        {{ partial "helper/icon" "toggle-left" }}
-                        {{ partial "helper/icon" "toggle-right" }}
+                        <b class="icon-tabler-toggle-left">
+                            {{ partial "helper/icon" "toggle-left" }}
+                        </b>
+                        <b class="icon-tabler-toggle-right">
+                            {{ partial "helper/icon" "toggle-right" }}
+                        </b>
                         <span>{{ T "darkMode" }}</span>
                     </li>
                 {{ end }}
