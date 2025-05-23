@@ -48,7 +48,7 @@
 
         {{ if and (eq .Site.Params.comments.enabled true) (eq .Site.Params.comments.provider "waline") (eq .Site.Params.comments.waline.pageview true) }}
             <div>
-                {{ partial "helper/icon" "user" }}
+                {{ partial "helper/icon" "view" }}
                 <span class="article-pageview">
                     <span class="waline-pageview-count" data-path="{{ .RelPermalink }}">*</span> {{ T "article.pageView" }}
                 </span>
