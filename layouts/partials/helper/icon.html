@@ -1,6 +1,51 @@
-{{- $iconFile := resources.GetMatch (printf "icons/%s.svg" .) -}}
-{{- if $iconFile -}}
-    {{- $iconFile.Content | safeHTML -}}
-{{- else -}}
-    {{- errorf "Error: icon '%s.svg' is not found under 'assets/icons' folder" . -}}
-{{- end -}}
+{{/* 先尝试把 . 当作字符串处理图标名 */}}
+{{ $iconName := . }}
+
+{{/* 再尝试用 site 全局变量 */}}
+{{ $site := site }}
+
+{{ $useEmoji := false }}
+{{ if $site }}
+  {{ $useEmoji = $site.Params.icons_emoji }}
+{{ end }}
+
+{{ $emojiMap := dict
+    "tag" "🏷️"
+    "user" "👤"
+    "view" "👁️"
+    "search" "🔍"
+    "archives" "🗄️"
+    "back" "↩️"
+    "clock" "⏱️"
+    "date" "🕘"
+    "home" "🏠"
+    "language" "🌐"
+    "resourcesdata" "📊"
+    "categories" "📂"
+    "arrow-back" "⬅️"
+    "toggle-left" "🌑"
+    "toggle-right" "☀️"
+    "link" "🔗"
+    "infinity" "♾️"
+    "hash" "#️⃣"
+}}
+
+{{ if $useEmoji }}
+  {{ with index $emojiMap $iconName }}
+    {{ . }}
+  {{ else }}
+    {{ $iconFile := resources.GetMatch (printf "icons/%s.svg" $iconName) }}
+    {{ if $iconFile }}
+      {{ $iconFile.Content | safeHTML }}
+    {{ else }}
+      {{ errorf "Error: icon '%s.svg' not found" $iconName }}
+    {{ end }}
+  {{ end }}
+{{ else }}
+  {{ $iconFile := resources.GetMatch (printf "icons/%s.svg" $iconName) }}
+  {{ if $iconFile }}
+    {{ $iconFile.Content | safeHTML }}
+  {{ else }}
+    {{ errorf "Error: icon '%s.svg' not found" $iconName }}
+  {{ end }}
+{{ end }}

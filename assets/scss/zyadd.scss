@@ -46,6 +46,8 @@ $defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
 /* 临时处理 */
 /*手机访问显示右边栏*/
 .container .right-sidebar{display: flex;}
+/*边栏调整*/
+.widget-icon {font-size: 1.68em;}
 /*友链*/
 .friend-links{margin-block-start: 0; margin-block-end: 0; padding-inline-start: 0; list-style: none; flex-wrap: nowrap; flex-direction: column;}
 .friend-links li{display: inline-flex;}
