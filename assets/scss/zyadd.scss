@@ -46,6 +46,13 @@ $defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
 /* 临时处理 */
 /*手机访问显示右边栏*/
 .container .right-sidebar{display: flex;}
+/* 菜单优化 */
+#main-menu li a{
+    color: var(--card-text-color-main);
+    &:hover{
+        background: var(--code-background-color);
+    }
+}
 /*边栏调整*/
 .widget-icon {font-size: 1.68em;}
 /*友链*/
@@ -59,3 +66,47 @@ $defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
 /* .article-title a:hover{color: #f80;} */
 /* .tagCloud-tags a:hover{background-color: #06e;} */
 /* .friend-links a:hover{background-color: #8a0;} */
+
+
+#photobanner {
+    // background: url(https://yijile.com/static/images/sunset-01-440x80.webp) no-repeat center -16px;
+    // background-size: contain;
+    height: auto;
+    width: 100vw;
+    left: 0; right: 0; top: 0;
+    position: fixed;
+    z-index: -1;
+    animation: fade-in 4s;
+    img {
+        width: 110%;
+        height: auto;
+        display: block;
+        opacity: .4;
+        filter: blur(6px);
+        margin: -1em -5% auto;
+    }
+    &::after {
+        content: " ";
+        height: 50%;
+        width: 100%;
+        display: block;
+        bottom: -1em;
+        background: linear-gradient(rgba(225,225,225, 0%), var(--body-background));
+        background: linear-gradient(color-mix(in srgb, var(--body-background) 0%, transparent), var(--body-background));
+        position: absolute;
+        z-index: 2;
+    }
+}
+
+
+@keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    18% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
