@@ -31,4 +31,39 @@
     /// Waline client configuration see: https://waline.js.org/en/reference/client.html
     Waline.init({{ $config | jsonify | safeJS }});
 </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const commentEl = document.querySelector("#waline");
+      if (!commentEl) return;
+    
+      const whitelist = ["yijile.com", "localhost", "github.com", "1px.run"];
+    
+      const isWhitelisted = href => {
+        try {
+          const host = new URL(href).hostname;
+          return whitelist.some(domain => host.endsWith(domain));
+        } catch {
+          return false;
+        }
+      };
+    
+      const updateLinks = () => {
+        commentEl.querySelectorAll("a[href^='http']").forEach(link => {
+          const href = link.getAttribute("href");
+          if (!isWhitelisted(href)) {
+            link.href = `/links/redirect.html?url=${encodeURIComponent(href)}`;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer nofollow";
+          } else {
+            link.setAttribute("target", "_blank");
+            link.setAttribute("rel", "noopener noreferrer");
+          }
+        });
+      };
+    
+      new MutationObserver(updateLinks).observe(commentEl, { childList: true, subtree: true });
+    });
+    </script>
+    
 {{- end -}}
