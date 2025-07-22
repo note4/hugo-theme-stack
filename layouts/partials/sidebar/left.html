@@ -49,7 +49,7 @@
                     >
                         {{ $icon := default "link" .Params.Icon }}
                         {{ with $icon }}
-                            {{ partial "helper/icon" . }}
+                            {{- partial "helper/icon" . -}}
                         {{ end }}
                     </a>
                 </li>
@@ -68,7 +68,7 @@
                     {{ warnf "Menu item [%s] is using [pre] field to set icon, please use [params.icon] instead.\nMore information: https://stack.jimmycai.com/config/menu" .URL }}
                 {{ end }}
                 {{ with $icon }}
-                    {{ partial "helper/icon" . }}
+                    {{- partial "helper/icon" . -}}
                 {{ end }}
                 <span>{{- .Name -}}</span>
             </a>
@@ -80,7 +80,7 @@
                 {{ if ( compare.Gt .Site.Home.AllTranslations.Len 1 ) }}
                     {{ with .Site.Home.AllTranslations }}
                         <li id="i18n-switch">  
-                            {{ partial "helper/icon" "language" }}
+                            {{- partial "helper/icon" "language" -}}
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 {{ range . }}
                                     <option value="{{ .Permalink }}" {{ if eq .Language.Lang $currentLanguageCode }}selected{{ end }}>{{ .Language.LanguageName }}</option>
@@ -90,17 +90,17 @@
                     {{ end }}
                 {{ end }}
 
-                {{ if (default false .Site.Params.colorScheme.toggle) }}
+                {{- if (default false .Site.Params.colorScheme.toggle) -}}
                     <li id="dark-mode-toggle">
                         <b class="icon-tabler-toggle-left">
-                            {{ partial "helper/icon" "toggle-left" }}
+                            {{- partial "helper/icon" "toggle-left" -}}
                         </b>
                         <b class="icon-tabler-toggle-right">
-                            {{ partial "helper/icon" "toggle-right" }}
+                            {{- partial "helper/icon" "toggle-right" -}}
                         </b>
-                        <span>{{ T "darkMode" }}</span>
+                        <span>{{- T "darkMode" -}}</span>
                     </li>
-                {{ end }}
+                {{- end -}}
             </ol>
         </li>
     </ol>
