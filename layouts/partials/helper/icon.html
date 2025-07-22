@@ -1,15 +1,15 @@
 {{/* 先尝试把 . 当作字符串处理图标名 */}}
-{{ $iconName := . }}
+{{- $iconName := . -}}
 
 {{/* 再尝试用 site 全局变量 */}}
-{{ $site := site }}
+{{- $site := site -}}
 
-{{ $useEmoji := false }}
-{{ if $site }}
-  {{ $useEmoji = $site.Params.icons_emoji }}
-{{ end }}
+{{- $useEmoji := false -}}
+{{- if $site -}}
+  {{- $useEmoji = $site.Params.icons_emoji -}}
+{{- end -}}
 
-{{ $emojiMap := dict
+{{- $emojiMap := dict
     "tag" "🏷️"
     "user" "👤"
     "view" "👁️"
@@ -28,24 +28,24 @@
     "link" "🔗"
     "infinity" "♾️"
     "hash" "#️⃣"
-}}
+-}}
 
-{{ if $useEmoji }}
-  {{ with index $emojiMap $iconName }}
-    {{ . }}
-  {{ else }}
-    {{ $iconFile := resources.GetMatch (printf "icons/%s.svg" $iconName) }}
-    {{ if $iconFile }}
-      {{ $iconFile.Content | safeHTML }}
-    {{ else }}
-      {{ errorf "Error: icon '%s.svg' not found" $iconName }}
-    {{ end }}
-  {{ end }}
-{{ else }}
-  {{ $iconFile := resources.GetMatch (printf "icons/%s.svg" $iconName) }}
-  {{ if $iconFile }}
-    {{ $iconFile.Content | safeHTML }}
-  {{ else }}
-    {{ errorf "Error: icon '%s.svg' not found" $iconName }}
-  {{ end }}
-{{ end }}
+{{- if $useEmoji -}}
+  {{- with index $emojiMap $iconName -}}
+    {{- . -}}
+  {{- else -}}
+    {{- $iconFile := resources.GetMatch (printf "icons/%s.svg" $iconName) -}}
+    {{- if $iconFile -}}
+      {{- $iconFile.Content | safeHTML -}}
+    {{- else -}}
+      {{- errorf "Error: icon '%s.svg' not found" $iconName -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{- $iconFile := resources.GetMatch (printf "icons/%s.svg" $iconName) -}}
+  {{- if $iconFile -}}
+    {{- $iconFile.Content | safeHTML -}}
+  {{- else -}}
+    {{- errorf "Error: icon '%s.svg' not found" $iconName -}}
+  {{- end -}}
+{{- end -}}
