@@ -1,54 +1,97 @@
 {{ define "body-class" }}template-archives{{ end }}
 {{ define "main" }}
-    <header>
-        {{- $taxonomy := $.Site.GetPage "taxonomyTerm" "categories" -}}
-        {{- $terms := $taxonomy.Pages -}}
-        {{ if $terms }}
-        <h2 class="section-title">{{ $taxonomy.Title }}</h2>
-        <div class="subsection-list">
-            <div class="article-list--tile">
-                {{ range $terms }}
-                    {{ partial "article-list/tile" (dict "context" . "size" "250x150" "Type" "taxonomy") }}
-                {{ end }}
-            </div>
-        </div>
-        {{ end }}
-    </header>
 
-    {{/* 获取当前 Section 的年份（如果有） */}}
-    {{ $year := .Title }}
-    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
-    {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
-    {{ $filtered := ($pages | intersect $notHidden) }}
-
-    {{/* 如果当前页面是某一年的归档 Section，则只筛选该年份的文章 */}}
-    {{ if (and (ne $year "归档") (findRE "^[0-9]{4}$" $year)) }}
-      {{ $filtered = where $filtered "Date.Year" "eq" (int $year) }}
-    {{ end }}
-
-    {{ $paginated := .Paginate $filtered }}
-
-
-    {{ range $paginated.Pages.GroupByDate "2006" }}
-    {{ $id := lower (replace .Key " " "-") }}
-    <div class="archives-group" id="{{ $id }}">
-        <h2 class="archives-date section-title">
-            
-            <a href="{{ (print "archives/" $id "/" ) | absURL }}">{{ .Key }} Year</a>{{/*  注意：需补充翻译 */}}
-            {{/* 
-                {{ .Key }}
-                <a href="{{ $.RelPermalink }}{{ $id }}/">{{ .Key }}</a>
-             */}}
-        </h2>
-        <div class="article-list--compact">
-            {{ range .Pages }}
-                {{ partial "article-list/compact" . }}
+<header>
+    {{- $taxonomy := $.Site.GetPage "taxonomyTerm" "categories" -}}
+    {{- $terms := $taxonomy.Pages -}}
+    {{ if $terms }}
+    <h2 class="section-title">{{ $taxonomy.Title }}</h2>
+    <div class="subsection-list">
+        <div class="article-list--tile">
+            {{ range $terms }}
+                {{ partial "article-list/tile" (dict "context" . "size" "250x150" "Type" "taxonomy") }}
             {{ end }}
         </div>
     </div>
     {{ end }}
+</header>
 
-    {{- partial "pagination.html" . -}}
+{{ $title := .Title }}
+{{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+{{ $notHidden := where $pages "Params.hidden" "!=" true }}
+{{ $filtered := ($pages | intersect $notHidden) }}
 
-    {{ partialCached "footer/footer" . }}
+{{ if or (eq $title "归档") (eq $title "Archives") (eq $title "archives") }}
+    {{/* 顶级归档页，显示全部文章分页 */}}
+    {{ $paginated := .Paginate $filtered }}
+
+    {{ range $paginated.Pages.GroupByDate "2006" }}
+        {{ $id := lower (replace .Key " " "-") }}
+        <div class="archives-group" id="{{ $id }}">
+            <h2 class="archives-date section-title">
+                <a href="{{ (print "archives/" .Key "/" ) | absURL }}">{{ .Key }} 年发布的内容</a>
+            </h2>
+            <div class="article-list--compact">
+                {{ range .Pages }}
+                    {{ partial "article-list/compact" . }}
+                {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+
+{{ else if findRE "^[0-9]{4}$" $title }}
+    {{/* 年归档，只显示该年按月分组的文章 */}}
+    {{ $year := int (replaceRE "^0+" "" $title) }}
+    {{ $filtered = where $filtered "Date.Year" "eq" $year }}
+    {{ $paginated := .Paginate $filtered }}
+
+    <h1 class="section-title">{{ $year }}年发布的内容</h1>
+
+    {{ range $paginated.Pages.GroupByDate "01" }}
+        {{ $id := lower (printf "%s-%s" $title .Key) }}
+        <div class="archives-group" id="{{ $id }}">
+            <h2 class="archives-date section-title">
+                {{/* <a href="{{ (print "archives/" $title "/" .Key "/" ) | absURL }}">
+                    {{ printf "%s年%s月发布的内容" $title .Key }}
+                </a> */}}
+                {{ printf "%s月"  .Key }}
+            </h2>
+            <div class="article-list--compact">
+                {{ range .Pages }}
+                    {{ partial "article-list/compact" . }}
+                {{ end }}
+            </div>
+        </div>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+
+{{ else if findRE "^(0?[1-9]|1[0-2])$" $title }}
+    {{/* 月归档，显示该年月的文章 */}}
+    {{ $month := int (replaceRE "^0+" "" $title) }}
+    {{ $year := int (replaceRE "^0+" "" .Parent.Title) }}
+    {{ $filtered = where $filtered "Date.Year" "eq" $year }}
+    {{ $filtered = where $filtered "Date.Month" "eq" $month }}
+    {{ $paginated := .Paginate $filtered }}
+
+    <h1 class="section-title">{{ printf "%d年%02d月发布的内容" $year $month }}</h1>
+
+    <div class="archives-group" id="{{ lower (printf "%s-%02d" $year $month) }}">
+        <div class="article-list--compact">
+            {{ range $paginated.Pages }}
+                {{ partial "article-list/compact" . }}
+            {{ end }}
+        </div>
+    </div>
+
+    {{ partial "pagination.html" . }}
+
+{{ else }}
+    <p>无效归档页面</p>
+{{ end }}
+
+{{ partialCached "footer/footer" . }}
+
 {{ end }}
