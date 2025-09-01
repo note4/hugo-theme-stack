@@ -2,7 +2,7 @@
     {{ partial "article/components/tags" . }}
 
     {{ if eq (.Params.metaLocation | default "top") "bottom" }}
-    {{ partial "article/components/details-meta.html" . }}
+    {{ partial "custom_html/details-meta.html" . }}
     {{ end }}
 
     {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}

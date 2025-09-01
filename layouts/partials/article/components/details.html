@@ -24,7 +24,11 @@
     </div>
 
     {{ if ne (.Params.metaLocation | default "top") "bottom" }}
-        {{ partial "article/components/details-meta.html" . }}
+        {{ partial "custom_html/details-meta.html" . }}
+    {{ end }}
+
+    {{ if and (not .IsHome) (or .IsPage .IsSection "posts") }}
+    {{ partial "custom_html/ads.html" . }}
     {{ end }}
 
     {{ if .IsTranslated }}
