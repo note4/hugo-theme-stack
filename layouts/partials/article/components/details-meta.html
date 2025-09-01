@@ -1,0 +1,35 @@
+{{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
+{{ $showDate := .Params.showDate | default (not .Date.IsZero) }}
+{{ $showPageViews := .Params.showPageViews | default (and (eq .Site.Params.comments.enabled true) (eq .Site.Params.comments.provider "waline") (eq .Site.Params.comments.waline.pageview true)) }}
+{{ $showFooter := or $showDate $showReadingTime $showPageViews }}
+
+{{ if $showFooter }}
+<footer class="article-time">
+    {{ if $showDate }}
+        <div>
+            {{ partial "helper/icon" "date" }}
+            <time class="article-time--published">
+                {{- .Date | time.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
+            </time>
+        </div>
+    {{ end }}
+
+    {{ if $showReadingTime }}
+        <div>
+            {{ partial "helper/icon" "clock" }}
+            <time class="article-time--reading">
+                {{ T "article.readingTime" .ReadingTime }}
+            </time>
+        </div>
+    {{ end }}
+
+    {{ if $showPageViews }}
+        <div>
+            {{ partial "helper/icon" "view" }}
+            <span class="article-pageview">
+                <span class="waline-pageview-count" data-path="{{ .RelPermalink }}">*</span> {{ T "article.pageView" }}
+            </span>
+        </div>
+    {{ end }}
+</footer>
+{{ end }}

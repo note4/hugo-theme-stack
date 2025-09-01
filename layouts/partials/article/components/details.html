@@ -23,38 +23,8 @@
         {{ end }}
     </div>
 
-    {{ $showReadingTime := .Params.readingTime | default (.Site.Params.article.readingTime) }}
-    {{ $showDate := not .Date.IsZero }}
-    {{ $showFooter := or $showDate $showReadingTime }}
-    {{ if $showFooter }}
-    <footer class="article-time">
-        {{ if $showDate }}
-            <div>
-                {{ partial "helper/icon" "date" }}
-                <time class="article-time--published">
-                    {{- .Date | time.Format (or .Site.Params.dateFormat.published "Jan 02, 2006") -}}
-                </time>
-            </div>
-        {{ end }}
-
-        {{ if $showReadingTime }}
-            <div>
-                {{ partial "helper/icon" "clock" }}
-                <time class="article-time--reading">
-                    {{ T "article.readingTime" .ReadingTime }}
-                </time>
-            </div>
-        {{ end }}
-
-        {{ if and (eq .Site.Params.comments.enabled true) (eq .Site.Params.comments.provider "waline") (eq .Site.Params.comments.waline.pageview true) }}
-            <div>
-                {{ partial "helper/icon" "view" }}
-                <span class="article-pageview">
-                    <span class="waline-pageview-count" data-path="{{ .RelPermalink }}">*</span> {{ T "article.pageView" }}
-                </span>
-            </div>
-        {{ end }}
-    </footer>
+    {{ if ne (.Params.metaLocation | default "top") "bottom" }}
+        {{ partial "article/components/details-meta.html" . }}
     {{ end }}
 
     {{ if .IsTranslated }}

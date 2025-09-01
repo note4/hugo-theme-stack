@@ -30,6 +30,8 @@
             </a>
         </div>
     {{ end }}
-
+    
+    {{ if not (eq .Params.detailsPosition "bottom") }}
     {{ partialCached "article/components/details" . .RelPermalink }}
+    {{ end }}
 </header>
