@@ -27,10 +27,6 @@
         {{ partial "custom_html/details-meta.html" . }}
     {{ end }}
 
-    {{ if and (not .IsHome) (or .IsPage .IsSection "posts") }}
-    {{ partial "custom_html/ads.html" . }}
-    {{ end }}
-
     {{ if .IsTranslated }}
         <footer class="article-translations">
             {{ partial "helper/icon" "language" }}

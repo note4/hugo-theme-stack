@@ -1,0 +1,3 @@
+{{ if and .Site.Params.adsense (ne .Site.Params.adsense.client "") }}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ .Site.Params.adsense.client }}" crossorigin="anonymous"></script>
+{{ end }}

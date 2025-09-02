@@ -1,9 +1,15 @@
 <article class="{{ if .Params.image }}has-image {{ end }}main-article">
     {{ partial "article/components/header" . }}
 
+    {{ if and (not .IsHome) (or .IsPage .IsSection "posts") }}
+    {{ partial "custom_html/ad-article-in.html" . }}
+    {{ end }}
+
     {{ partial "article/components/content" . }}
 
     {{ partial "article/components/footer" . }}
+
+    {{ partial "custom_html/ad-bottom.html" . }}
 
     {{ if or .Params.math .Site.Params.article.math }}
         {{ partialCached "article/components/math.html" . }}
