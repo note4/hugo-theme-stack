@@ -6,7 +6,7 @@
 {{- else -}}
 {{- $pages = $pctx.Pages -}}
 {{- end -}}
-{{- $pages := where (where $pages "Params.hidden" "!=" true) "Params.atom" "!=" false -}}
+{{- $pages := where $pages "Params.hidden" "!=" true -}}
 {{- $limit := .Site.Config.Services.RSS.Limit -}}
 {{- if ge $limit 1 -}}
 {{- $pages = $pages | first $limit -}}
@@ -18,10 +18,10 @@
         <link>{{ .Permalink }}</link>
         <description>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}</description>
         <generator>Hugo -- gohugo.io</generator>{{ with .Site.LanguageCode }}
-        <language>{{.}}</language>{{end}}{{ with .Site.Params.Author.name }}
-        <managingEditor>{{.}}</managingEditor>{{end}}{{ with .Site.Params.Author.name }}
-        <webMaster>{{.}}</webMaster>{{end}}{{ with .Site.Title }}
-        <copyright>Copyright ©{{ now.Format "2006" }} {{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
+        <language>{{.}}</language>{{end}}{{ with .Site.Params.Author.email }}
+        <managingEditor>{{.}}{{ with $.Site.Params.Author.name }} ({{.}}){{end}}</managingEditor>{{end}}{{ with .Site.Params.Author.email }}
+        <webMaster>{{.}}{{ with $.Site.Params.Author.name }} ({{.}}){{end}}</webMaster>{{end}}{{ with .Site.Copyright }}
+        <copyright>{{.}}</copyright>{{end}}{{ if not .Date.IsZero }}
         <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
         {{- with .OutputFormats.Get "RSS" -}}
         {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
@@ -38,15 +38,10 @@
         {{ with .Site.Params.Author.email }}<author>{{.}}{{ with $.Site.Params.Author.name }} ({{.}}){{end}}</author>{{end}}
         <guid>{{ .Permalink }}</guid>
         <description>
-        {{- $image := partial "helper/image" (dict "Context" . "Type" "rss") -}}
-        {{- if $image.exists -}}
-            {{ "<" | html }}img src="{{ $image.permalink | absURL }}" alt="Featured image of post {{ .Title }}" {{ "/>" | html}}
-        {{- end -}}
-        {{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | html }}{{ end -}}
-        ...<p><a href="{{ .Permalink }}">阅读全文</a></p></description>
-        {{- if and site.Params.ShowFullTextinRSS .Content }}
-        <content:encoded>{{ (printf "<![CDATA[%s]]>" .Content) | safeHTML }}</content:encoded>
-        {{- end }}
+            {{- $image := partial "helper/image" (dict "Context" . "Type" "rss") -}}
+            {{- if $image.exists -}}
+                {{ "<" | html }}img src="{{ $image.permalink | absURL }}" alt="Featured image of post {{ .Title }}" {{ "/>" | html}}
+            {{- end -}}{{ $content }}</description>
         </item>
         {{ end }}
     </channel>
