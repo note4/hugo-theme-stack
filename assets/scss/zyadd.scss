@@ -138,7 +138,7 @@ $defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
 }
 
 /* docsearch 自定义样式 */
-#docsearch { display: flex ; flex-direction: column; }
-.DocSearch-Button{background-color: var(--card-background);border: 0; border-radius: var(--card-border-radius); padding: 15px 20px 15px;}
-.DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
-.DocSearch-Button-Placeholder {font-size: 1.3rem;}
+.sidebar #docsearch { display: flex ; flex-direction: column; }
+.sidebar #docsearch .DocSearch-Button{background-color: var(--card-background);border: 0; border-radius: var(--card-border-radius); padding: 15px 20px 15px;}
+.sidebar #docsearch .DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
+.sidebar #docsearch .DocSearch-Button-Placeholder {font-size: 1.3rem;}
