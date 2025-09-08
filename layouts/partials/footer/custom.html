@@ -10,10 +10,8 @@
 });
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@beta" />
-<style>
-#docsearch { display: flex ; flex-direction: column; }
-.DocSearch-Button{background-color: var(--card-background);border: 0; border-radius: var(--card-border-radius); padding: 15px 20px 15px;}
-.DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
-.DocSearch-Button-Placeholder {font-size: 1.3rem;}
-.DocSearch-Button-Key{}
-</style>
+
+{{ if .Site.Params.say.enable }}
+<div class="health-tips"><script>var quotes = [ {{ range .Site.Params.say.list }} "{{ . }}",{{ end }} ];
+var quote_note;quote_note = quotes[Math.floor(Math.random() * quotes.length)];document.write(quote_note);</script></div>
+{{ end }}
