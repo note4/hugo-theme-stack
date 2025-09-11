@@ -2,7 +2,10 @@ toggleMenu:
     other: 切换菜单
 
 darkMode:
-    other: 白天/黑夜
+    other: 暗黑模式
+lightMode:
+    other: 白天模式
+
 
 list:
     page: "{{ .Count }} 个页面"
