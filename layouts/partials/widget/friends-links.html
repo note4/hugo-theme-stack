@@ -1,9 +1,11 @@
 {{ if and .Context.IsHome (eq .Context.Paginator.PageNumber 1) }}
 <section class="widget friend-links tagCloud">
-  <div class="widget-icon">
-    {{ partial "helper/icon" "link" }}
-  </div>
-  <h2 class="widget-title section-title">{{ T "custom.links.title" }}</h2>
+  <h2 class="widget-title section-title">
+    <span class="widget-icon">
+      {{ partial "helper/icon" "link" }}
+    </span>
+    {{ T "custom.links.title" }}
+  </h2>
   <ul class="tagCloud-tags friend-links">
     {{ range site.Data.friend_links }}
       {{ if and 
