@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/npm/@docsearch/js@beta"></script>
+<script src="https://unpkg.com/@docsearch/js@beta"></script>
 <script>docsearch({
   container: '#docsearch',
   appId: 'ZLXQLZSKUC',
@@ -6,10 +6,10 @@
   apiKey: '05cff29be2ed62419b793bdd60737de8',
 //   askAi: 'YOUR_ALGOLIA_ASSISTANT_ID',
   maxResultsPerGroup: '100',
-  placeholder: '搜索文档......'
+  placeholder: '{{ T `search.placeholder` }}......'
 });
 </script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@beta" />
+<link rel="stylesheet" href="https://unpkg.com/@docsearch/css@beta" />
 
 {{ if .Site.Params.say.enable }}
 <div class="health-tips"><script>var quotes = [ {{ range .Site.Params.say.list }} "{{ . }}",{{ end }} ];
