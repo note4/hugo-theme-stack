@@ -1,5 +1,7 @@
 {{/* 仅当 client 和 bottom_slot 都存在，且 ad_bottom 不为 false 时才显示 */}}
-{{ if and (and .Site.Params.adsense (ne .Site.Params.adsense.client "")) (and (ne .Site.Params.adsense.bottom_slot "") (default true .Params.ad_bottom)) }}
+
+{{/* 列表广告位 */}}
+{{ if and (and .Site.Params.adsense (ne .Site.Params.adsense.client "")) (and (ne .Site.Params.adsense.bottom_slot "") (default true .Params.ad_bottom)) (ne .Site.Params.adsense.show_list_bottom false) }}
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="{{ .Site.Params.adsense.client }}"
@@ -10,3 +12,22 @@
      (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
 {{ end }}
+
+
+{{/* 文章页底部广告位 */}}
+{{ if and (and .Site.Params.adsense (ne .Site.Params.adsense.client "")) (and (ne .Site.Params.adsense.bottom_slot "") (default true .Params.ad_bottom)) (or (eq .Kind "page") (eq .Kind "post")) }}
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="{{ .Site.Params.adsense.client }}"
+     data-ad-slot="{{ .Site.Params.adsense.bottom_slot }}"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+{{ end }}
+
+{{/* 本地广告位标记 */}}
+<style> 
+b,ins{background-color: yellow; font-size: 3em;}
+</style>
