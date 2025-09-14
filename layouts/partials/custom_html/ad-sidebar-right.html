@@ -1,0 +1,21 @@
+{{/* 仅当 client 和 bottom_slot 都存在，且 ad_bottom 不为 false 时才显示 */}}
+
+{{/* 文章页底部广告位 */}}
+{{- if and (and .Site.Params.adsense (ne .Site.Params.adsense.client "")) (and (ne .Site.Params.adsense.right_slot "") (default true .Params.ad_right)) -}}
+<div class="widget archives">
+     <h2 class="widget-title section-title">
+        ADS
+     </h2>
+     <div>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="{{ .Site.Params.adsense.client }}"
+               data-ad-slot="{{ .Site.Params.adsense.right_slot }}"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+     </div>
+ </div>
+{{- end -}}
