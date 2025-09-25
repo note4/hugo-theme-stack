@@ -13,7 +13,13 @@
 
 {{- $title := partial "data/title" . -}}
 <title>{{ $title }}</title>
+
+{{- if eq .Kind "404" -}}
+<meta name="robots" content="noindex, nofollow">
+{{- else -}}
 <link rel="canonical" href="{{ .Permalink }}">
+{{- end -}}
+
 {{- partial "head/style.html" . -}}
 {{- partial "head/script.html" . -}}
 {{- partial "head/opengraph/include.html" . -}}
