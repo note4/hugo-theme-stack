@@ -182,6 +182,10 @@ height: 100%;
 margin-top: 0;
 }
 
+/*friends-list*/
+.article-page .main-article .article-content{
+    .friends-list img{max-width: 1.5em; height: auto; border-radius: 500em;}
+}
 
 /* 底部自定义健康提示 */
 .health-tips {
@@ -197,6 +201,9 @@ margin-top: 0;
     background: var(--body-background);
     color: var(--body-text-color);
 }
+
+/*网站运行时长*/
+#runningtime{color: #494;}
 
 /* docsearch 自定义样式 */
 .sidebar #docsearch { display: flex ; flex-direction: column; }
