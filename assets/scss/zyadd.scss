@@ -223,3 +223,82 @@ ins.adsbygoogle {
 .wl-reaction-title {
     color: var(--card-text-color-main);
 }
+
+
+/*相册页面*/
+.gallery-grid {
+    column-count: 2; // 默认2列
+    column-gap: 15px;
+    padding-bottom: 3em;
+
+    @media (min-width: 768px) {
+        column-count: 3;
+    }
+
+    @media (min-width: 1024px) {
+        column-count: 4;
+    }
+}
+
+.gallery-item {
+    margin-bottom: 15px; // 垂直间距
+    break-inside: avoid;
+    page-break-inside: avoid; // 兼容
+    border-radius: 12px;
+    overflow: hidden;
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease-in-out;
+        cursor: zoom-in;
+        object-fit: cover;
+    }
+
+    a[href*="."] { // Targets image links (containing a dot for file extensions)
+        display: block;
+        line-height: 0;
+    }
+
+    img:hover {
+        transform: translateY(3px) scale(1.2);
+    }
+
+    .gallery-title {
+        display: block;
+        font-size: 0.8em;
+        color: var(--card-text-color-main);
+        text-decoration: none;
+        white-space: nowrap; // 单行显示
+        overflow: hidden; // 超出隐藏
+        text-overflow: ellipsis; // 超出部分显示省略号
+        text-align: center;
+        line-height: 1.2; // 确保标题可见
+        font-weight: 500; // 稍加粗
+        padding: 0.8em;
+        background: rgba(129, 129, 129, 0.16);
+        transition: color 0.2s ease-in-out;
+    }
+
+    .gallery-title:hover {
+        text-decoration: underline;
+    }
+}
+
+
+/*灯箱*/
+/*like, photos*/
+.lb {
+    position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+    background:rgba(0,0,0,.85); z-index:9999;
+}
+.lb.show { display:flex; }
+.lb .box { position:relative; max-width:95%; max-height:95%; text-align:center; }
+.lb img { max-width:100%; max-height:80vh; }
+.lb .caption { margin-top:6px; color:#eee; font-size:14px; }
+.lb .close { position:absolute; right:-8px; top:-8px; background:#222; color:#fff;
+width:28px;height:28px; display:flex;align-items:center;justify-content:center;
+border-radius:50%; cursor:pointer; border: 2px solid;}
+.lb .nav { position:absolute; top:50%; transform:translateY(-50%); font-size:40px; color:#fff; cursor:pointer; padding:10px; user-select:none; }
+.lb .nav.prev { left:10px; } .lb .nav.next { right:10px; }
