@@ -58,10 +58,15 @@ $defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
     }
 }
 
-
 /* 临时处理 */
 /*手机访问显示右边栏*/
-.container .right-sidebar{display: flex;}
+.container .right-sidebar{
+    display: flex;
+
+    @media (min-width: 768px) {
+        padding-top: var(--main-top-padding);
+    }
+}
 /* 菜单优化 */
 #main-menu li a{
     color: var(--card-text-color-main);
@@ -103,7 +108,6 @@ $defaultTagBackgrounds: #8a0, #e69, #06e, #f80, #65e;
         
     }
 }
-
 
 /*边栏调整*/
 .widget-icon {font-size: 1.32em;}
@@ -151,17 +155,10 @@ body{transition: none !important;}
     }
 }
 
-
 @keyframes fade-in {
-    0% {
-      opacity: 0;
-    }
-    18% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
+    0% {opacity: 0;}
+    18% {opacity: 0;}
+    100% {opacity: 1;}
 }
 
 /* 嵌入视频优化 */
@@ -206,10 +203,14 @@ margin-top: 0;
 #runningtime{color: #494;}
 
 /* docsearch 自定义样式 */
-.sidebar #docsearch { display: flex ; flex-direction: column; }
-.sidebar #docsearch .DocSearch-Button{background-color: var(--card-background);border: 0; border-radius: var(--card-border-radius); padding: 15px 20px 15px;}
-.sidebar #docsearch .DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
-.sidebar #docsearch .DocSearch-Button-Placeholder {font-size: 1.3rem;}
+.sidebar #docsearch { 
+    display: flex ; flex-direction: column; 
+    .DocSearch-Button{
+        background-color: var(--card-background);border: 0; border-radius: var(--card-border-radius); padding: 15px 20px 15px;
+    }
+    .DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
+    .DocSearch-Button-Placeholder {font-size: 1.3rem;}
+}
 
 /*推广优化*/
 ins.adsbygoogle {
