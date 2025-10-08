@@ -77,6 +77,17 @@ footer:
     designedBy:
         other: Theme {{ .Theme }} designed by {{ .DesignedBy }}
         
+custom:
     links:
         title:
             other: Friends Links
+
+siteRunning:
+    prefix: "This site has been running for"
+    suffix: "!"
+    units:
+        year: "years"
+        month: "months"
+        day: "days"
+        hour: "hours"
+        minute: "minutes"
