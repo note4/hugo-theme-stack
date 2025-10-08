@@ -12,7 +12,10 @@
             <a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title}}</a>
         {{ end }}
         &nbsp;/&nbsp;
-        <small><span id="runningtime" data-time="{{ $oldestPost := (where .Site.RegularPages "Type" "posts").ByDate | first 1 }}{{ with $oldestPost }}{{ with index . 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>{{ T "article.lastUpdatedOn" }} <time>{{ now | time.Format "2006-01-02 15:04" }}</time></small>
+        <small>
+            <span id="runningtime" data-time="{{ $oldestPost := (where .Site.RegularPages "Type" "posts").ByDate | first 1 }}{{ with $oldestPost }}{{ with index . 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
+            {{ T "article.lastUpdatedOn" }} <time>{{ now | time.Format "2006-01-02 15:04" }}</time>
+        </small>
     </section>
     
     <section class="powerby">
@@ -36,6 +39,6 @@ const startyijileTimeStr = runningTimeSpan.dataset.time;const startyijileDate = 
 
 const diff = new Date() - startyijileDate;
 const years = Math.floor(diff / 3.15576e10); const months = Math.floor(diff / 2.6298e9) % 12; const days = Math.floor(diff / 864e5) % 30; const hours = Math.floor(diff / 36e5) % 24; const minutes = Math.floor(diff / 6e4) % 60;
-const parts = []; if (years > 0) parts.push(`${years}年`); if (months > 0) parts.push(`${months}个月`); if (days > 0) parts.push(`${days}天`); if (hours > 0) parts.push(`${hours}小时`); if (minutes > 0) parts.push(`${minutes}分钟`);
-runningTimeSpan.innerHTML = `本站已运行 ${parts.join(' ')} 啦！&nbsp;`;
+const parts = []; if (years > 0) parts.push(`${years} {{ T `siteRunning.units.year` }}`); if (months > 0) parts.push(`${months} {{ T `siteRunning.units.month` }}`); if (days > 0) parts.push(`${days} {{ T `siteRunning.units.day` }}`); if (hours > 0) parts.push(`${hours} {{ T `siteRunning.units.hour` }}`); if (minutes > 0) parts.push(`${minutes} {{ T `siteRunning.units.minute` }}`);
+runningTimeSpan.innerHTML = `{{ T `siteRunning.prefix` }} ${parts.join(' ')} {{ T `siteRunning.suffix` }}`;
 </script>
