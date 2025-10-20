@@ -19,11 +19,11 @@
         {{ $tagsPage := .Site.GetPage "taxonomyTerm" "tags" }}
         {{ if $tagsPage }}
             <a href="{{ $tagsPage.RelPermalink }}">
-            {{ i18n "widget.tagCloud.more" | default "More" }} <sup>→</sup>
+            {{ i18n "widget.tagCloud.more" | default "More" }} ➡️<sup></sup>
             </a>
         {{ else }}
             <a href="{{ "/tags/" | relLangURL }}">
-            {{ i18n "widget.tagCloud.more" | default "More" }} <sup>→</sup>
+            {{ i18n "widget.tagCloud.more" | default "More" }} ➡️<sup></sup>
             </a>
         {{ end }}
 
