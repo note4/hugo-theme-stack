@@ -169,7 +169,27 @@ body{transition: none !important;}
 
 /*friends-list*/
 .article-page .main-article .article-content{
-    .friends-list img{max-width: 1.5em; height: auto; border-radius: 500em;}
+    .friends-list{
+        li{
+            padding: 0.21em 0;
+            a{
+                margin-right: 0.36em;
+            }
+        }
+        small{color: var(--accent-color-darker);}
+        img{
+            max-width: 1.5em; height: auto; border-radius: 500em;
+            float: left; margin-right: 0.21em;
+        }
+        .link-logo{
+            display: inline-block;
+            img{
+                max-height: 40px;
+                width: auto;
+                max-width: none;
+            }
+        }
+    } 
 }
 
 /* 底部自定义健康提示 */
