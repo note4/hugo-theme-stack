@@ -1,5 +1,7 @@
+<link rel="stylesheet" href="https://unpkg.com/@docsearch/css@beta" />
 <script src="https://unpkg.com/@docsearch/js@beta"></script>
-<script>docsearch({
+{{/*  <script>
+docsearch({
   container: '#docsearch',
   appId: 'ZLXQLZSKUC',
   indexName: 'yijile', 
@@ -8,8 +10,28 @@
   maxResultsPerGroup: '100',
   placeholder: '{{ T `search.placeholder` }}......'
 });
+</script>  */}}
+
+<script>
+  window.addEventListener('load', () => {
+    requestIdleCallback(() => {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/@docsearch/js@beta';
+      script.onload = () => {
+        docsearch({
+          container: '#docsearch',
+          appId: 'ZLXQLZSKUC',
+          indexName: 'yijile', 
+          apiKey: '05cff29be2ed62419b793bdd60737de8',
+        //   askAi: 'YOUR_ALGOLIA_ASSISTANT_ID',
+          maxResultsPerGroup: '100',
+          placeholder: '{{ T `search.placeholder` }}......'
+        });
+      };
+      document.body.appendChild(script);
+    });
+  });
 </script>
-<link rel="stylesheet" href="https://unpkg.com/@docsearch/css@beta" />
 
 {{ if .Site.Params.say.enable }}
 <div class="health-tips"><script>var quotes = [ {{ range .Site.Params.say.list }} "{{ . }}",{{ end }} ];
