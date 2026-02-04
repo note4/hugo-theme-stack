@@ -231,7 +231,7 @@ body{transition: none !important;}
         background-color: var(--card-background);border: 0; border-radius: var(--card-border-radius); padding: 15px 20px 15px;
     }
     .DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
-    .DocSearch-Button-Placeholder {font-size: 1.3rem;}
+    .DocSearch-Button-Placeholder { color: var(--card-text-color-tertiary); font-size: 1.3rem;}
 }
 
 /*推广优化*/
