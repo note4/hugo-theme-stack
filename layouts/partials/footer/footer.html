@@ -13,12 +13,20 @@
         {{ end }}
         &nbsp;/&nbsp;
         <small>
-            <span id="runningtime" data-time="{{ $oldestPost := (where .Site.RegularPages "Type" "posts").ByDate | first 1 }}{{ with $oldestPost }}{{ with index . 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
-            {{ T "article.lastUpdatedOn" }} <time>{{ now | time.Format "2006-01-02 15:04" }}</time>
+            {{ $posts := (where .Site.RegularPages "Type" "posts").ByDate }}
+            <span id="runningtime" class="lable" data-time="{{ with $posts }}{{ with index . 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
+
+            {{ if .IsHome }}
+            <span id="stop-updating" class="lable" data-last="{{ with $posts }}{{ with index .Reverse 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
+            {{ end }}
+            
+            
         </small>
     </section>
     
     <section class="powerby">
+        {{ T "article.lastUpdatedOn" }} <time>{{ now | time.Format "2006-01-02 15:04" }}</time> | 
+
         {{ with .Site.Params.footer.customText }}
             {{ . | safeHTML }} <br/>
         {{ end }}
@@ -30,15 +38,59 @@
             {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }}, 
             {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}.
         {{ end }}
-        
     </section>
 </footer>
-<script>
-const runningTimeSpan = document.getElementById('runningtime');
-const startyijileTimeStr = runningTimeSpan.dataset.time;const startyijileDate = new Date(startyijileTimeStr);
 
-const diff = new Date() - startyijileDate;
-const years = Math.floor(diff / 3.15576e10); const months = Math.floor(diff / 2.6298e9) % 12; const days = Math.floor(diff / 864e5) % 30; const hours = Math.floor(diff / 36e5) % 24; const minutes = Math.floor(diff / 6e4) % 60;
-const parts = []; if (years > 0) parts.push(`${years} {{ T `siteRunning.units.year` }}`); if (months > 0) parts.push(`${months} {{ T `siteRunning.units.month` }}`); if (days > 0) parts.push(`${days} {{ T `siteRunning.units.day` }}`); if (hours > 0) parts.push(`${hours} {{ T `siteRunning.units.hour` }}`); if (minutes > 0) parts.push(`${minutes} {{ T `siteRunning.units.minute` }}`);
-runningTimeSpan.innerHTML = `{{ T `siteRunning.prefix` }} ${parts.join(' ')} {{ T `siteRunning.suffix` }}`;
+<script>
+(function() {
+    function getPreciseDiff(start, end) {
+        let years = end.getFullYear() - start.getFullYear();
+        let months = end.getMonth() - start.getMonth();
+        let days = end.getDate() - start.getDate();
+        let hours = end.getHours() - start.getHours();
+        let minutes = end.getMinutes() - start.getMinutes();
+
+        if (minutes < 0) { minutes += 60; hours--; }
+        if (hours < 0) { hours += 24; days--; }
+        if (days < 0) {
+            let prevMonth = new Date(end.getFullYear(), end.getMonth(), 0);
+            days += prevMonth.getDate();
+            months--;
+        }
+        if (months < 0) { months += 12; years--; }
+
+        return { years, months, days, hours, minutes };
+    }
+
+    function format(diff, isStopMode) {
+        const res = [];
+        if (diff.years > 0) res.push(`${diff.years}{{ T "siteRunning.units.year" }}`);
+        if (diff.months > 0) res.push(`${diff.months}${isStopMode ? '个月' : '{{ T "siteRunning.units.month" }}'}`);
+        if (diff.days > 0) res.push(`${diff.days}${isStopMode ? '天' : '{{ T "siteRunning.units.day" }}'}`);
+        if (diff.hours > 0) res.push(`${diff.hours}{{ T "siteRunning.units.hour" }}`);
+        if (diff.minutes > 0) res.push(`${diff.minutes}{{ T "siteRunning.units.minute" }}`);
+        return res.join(' ');
+    }
+
+    const now = new Date();
+
+    const runEl = document.getElementById('runningtime');
+    if (runEl?.dataset.time) {
+        const start = new Date(runEl.dataset.time);
+        if (!isNaN(start)) {
+            const diff = getPreciseDiff(start, now);
+            runEl.innerHTML = `{{ T "siteRunning.prefix" }} ${format(diff, false)} {{ T "siteRunning.suffix" }}`;
+        }
+    }
+
+    const stopEl = document.getElementById('stop-updating');
+    if (stopEl?.dataset.last) {
+        const last = new Date(stopEl.dataset.last);
+        
+        if (!isNaN(last) && (now - last >= 864e5)) {
+            const diff = getPreciseDiff(last, now);
+            stopEl.innerHTML = `&nbsp;停更 ${format(diff, true)}`;
+        }
+    }
+})();
 </script>
