@@ -1,12 +1,15 @@
 $defaultTagBackgrounds: #8a0, #f80, #e69, #65e, #06e;
 
 :root{
+    --body-text-color: rgb(0 0 0 / 70%);
     --theme-color: #00bb22;
     --card-background: #ffffffd4;
+    --text-dark: #000;
 }
 :root[data-scheme=dark] {
     --card-background: #292a2dd4;
     --body-background: #202124;
+    --text-dark: #fff;
 }
 
 /* Default article style */
@@ -47,6 +50,14 @@ $defaultTagBackgrounds: #8a0, #f80, #e69, #65e, #06e;
     img {
         max-height: 95vh;
         width: auto;
+    }
+    blockquote {
+        p{
+            strong {
+                color: var(--text-dark);
+                text-decoration: underline wavy 3px #ff0055;
+            }
+        }
     }
 } 
 
