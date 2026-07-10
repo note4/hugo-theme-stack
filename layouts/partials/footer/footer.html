@@ -1,10 +1,9 @@
 {{- $ThemeVersion := "3.30.0" -}}
+{{ $posts := (where .Site.RegularPages "Type" "posts").ByDate }}
 <footer class="site-footer">
     <section class="copyright">
         &copy;
-        {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
-            {{ .Site.Params.footer.since }} - 
-        {{ end }}
+        {{ with $posts }}{{ with index . 0 }}{{ .Date.Format "2006" }}{{ end }}-{{ end -}}
         {{ now.Format "2006" }}
         {{ if .Site.Copyright }}
             {{ replace .Site.Copyright "[site_title]" (printf "<a href='%s'>%s</a>" .Site.BaseURL .Site.Title) | safeHTML }}
@@ -13,7 +12,7 @@
         {{ end }}
         &nbsp;/&nbsp;
         <small>
-            {{ $posts := (where .Site.RegularPages "Type" "posts").ByDate }}
+            
             <span id="runningtime" class="lable" data-time="{{ with $posts }}{{ with index . 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
 
             {{ if .IsHome }}
