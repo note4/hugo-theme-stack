@@ -12,14 +12,10 @@
         {{ end }}
         &nbsp;/&nbsp;
         <small>
-            
             <span id="runningtime" class="lable" data-time="{{ with $posts }}{{ with index . 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
-
             {{ if .IsHome }}
             <span id="stop-updating" class="lable" data-last="{{ with $posts }}{{ with index .Reverse 0 }}{{ .Date.Format "2006-01-02T15:04:05" }}{{ end }}{{ end }}"></span>
             {{ end }}
-            
-            
         </small>
     </section>
     
@@ -39,7 +35,6 @@
         {{ end }}
     </section>
 </footer>
-
 <script>
 (function() {
     function getPreciseDiff(start, end) {
@@ -61,12 +56,12 @@
         return { years, months, days, hours, minutes };
     }
 
-    function format(diff, isStopMode) {
+    function format(diff) {
         const res = [];
-        if (diff.years > 0) res.push(`${diff.years}{{ T "siteRunning.units.year" }}`);
-        if (diff.months > 0) res.push(`${diff.months}${isStopMode ? '个月' : '{{ T "siteRunning.units.month" }}'}`);
-        if (diff.days > 0) res.push(`${diff.days}${isStopMode ? '天' : '{{ T "siteRunning.units.day" }}'}`);
-        if (diff.hours > 0) res.push(`${diff.hours}{{ T "siteRunning.units.hour" }}`);
+        if (diff.years > 0)   res.push(`${diff.years}{{ T "siteRunning.units.year" }}`);
+        if (diff.months > 0)  res.push(`${diff.months}{{ T "siteRunning.units.month" }}`);
+        if (diff.days > 0)    res.push(`${diff.days}{{ T "siteRunning.units.day" }}`);
+        if (diff.hours > 0)   res.push(`${diff.hours}{{ T "siteRunning.units.hour" }}`);
         if (diff.minutes > 0) res.push(`${diff.minutes}{{ T "siteRunning.units.minute" }}`);
         return res.join(' ');
     }
@@ -77,8 +72,7 @@
     if (runEl?.dataset.time) {
         const start = new Date(runEl.dataset.time);
         if (!isNaN(start)) {
-            const diff = getPreciseDiff(start, now);
-            runEl.innerHTML = `{{ T "siteRunning.prefix" }} ${format(diff, false)} {{ T "siteRunning.suffix" }}`;
+            runEl.innerHTML = `{{ T "siteRunning.prefix" }} ${format(getPreciseDiff(start, now), false)} {{ T "siteRunning.suffix" }}`;
         }
     }
 
@@ -86,9 +80,10 @@
     if (stopEl?.dataset.last) {
         const last = new Date(stopEl.dataset.last);
         
-        if (!isNaN(last) && (now - last >= 864e5)) {
-            const diff = getPreciseDiff(last, now);
-            stopEl.innerHTML = `&nbsp;停更 ${format(diff, true)}`;
+        if (!isNaN(last) && (now - last >= 86400000)) {
+            stopEl.innerHTML = `&nbsp;{{ T "siteRunning.stop" | default "停更" }} ${format(getPreciseDiff(last, now), true)}`;
+        } else {
+            stopEl.hidden = true;
         }
     }
 })();
