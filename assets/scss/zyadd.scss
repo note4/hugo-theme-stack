@@ -12,6 +12,26 @@ $defaultTagBackgrounds: #8a0, #f80, #e69, #65e, #06e;
     --text-dark: #fff;
 }
 
+a {
+    text-decoration: none;
+    color: var(--accent-color);
+
+    &:hover {
+        color: var(--accent-color-darker);
+        text-decoration: underline;
+        text-decoration-color: var(--theme-color);
+        text-decoration-style: wavy;
+    }
+
+    &.link {
+        box-shadow: none;
+
+        &:hover {
+            box-shadow: none;
+        }
+    }
+}
+
 /* Default article style */
 .article-list {
     article {
@@ -129,12 +149,8 @@ $defaultTagBackgrounds: #8a0, #f80, #e69, #65e, #06e;
 .friend-links li{display: inline-flex;}
 /*交互优化*/
 .tagCloud-tags a:hover,
-.article-title a:hover,
 .article-list article .article-category a:hover,
 .related-content article:hover{filter: contrast(150%) hue-rotate(100deg);}
-/* .article-title a:hover{color: #f80;} */
-/* .tagCloud-tags a:hover{background-color: #06e;} */
-/* .friend-links a:hover{background-color: #8a0;} */
 
 .tagCloud-tags{
     sup{
@@ -241,7 +257,7 @@ body{transition: none !important;}
 /*网站运行时长*/
 span.lable{
     background: rgba(68, 153, 68, 0.665);
-    padding: 0.2em 0.4em;
+    padding: 0.2em 0.68em;
     margin: 0 0.4em;
     border-radius: 1em;
 }
@@ -258,6 +274,15 @@ span.lable{
     }
     .DocSearch-Button-Container svg {color: var(--card-text-color-tertiary);}
     .DocSearch-Button-Placeholder { color: var(--card-text-color-tertiary); font-size: 1.3rem;}
+}
+.DocSearch-Container{
+    --docsearch-highlight-color: var(--theme-color);
+    .DocSearch-Input, .DocSearch-Modal-heading{
+        font-size: inherit;
+    }
+    .cls-1, .cls-2{
+        fill: var(--theme-color);
+    }
 }
 
 /*推广优化*/
@@ -280,7 +305,6 @@ ins.adsbygoogle {
 .wl-reaction-title {
     color: var(--card-text-color-main);
 }
-
 
 /*相册页面*/
 .gallery-grid {
