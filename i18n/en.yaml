@@ -85,6 +85,7 @@ custom:
 siteRunning:
     prefix: "This site has been running for"
     suffix: "!"
+    stop: "Stopped for"
     units:
         year: "years"
         month: "months"

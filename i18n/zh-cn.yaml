@@ -80,6 +80,7 @@ custom:
 siteRunning:
     prefix: "本站已运行"
     suffix: "啦！"
+    stop: "停更"
     units:
         year: "年"
         month: "个月"
