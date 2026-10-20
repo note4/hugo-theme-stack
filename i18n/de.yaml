@@ -88,3 +88,11 @@ siteRunning:
         day: "Tagen"
         hour: "Stunden"
         minute: "Minuten"
+
+copyright:
+    original: "Inhalt ursprünglich von"
+    reprint: "Nachdruck von:"
+    badge_alt: "CC BY-NC-SA 4.0 Erklärung"
+    license_pre: "Lizenziert unter"
+    license_suf: "."
+    terms: "Bitte Quelle und Link angeben, Änderungen vermerken und nur unter denselben nicht-kommerziellen Bedingungen weitergeben."

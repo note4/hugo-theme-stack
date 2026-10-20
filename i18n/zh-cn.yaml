@@ -87,3 +87,11 @@ siteRunning:
         day: "天"
         hour: "小时"
         minute: "分钟"
+
+copyright:
+    original: "内容转自"
+    reprint: "转载请注明转自："
+    badge_alt: "CC BY-NC-SA 4.0 声明"
+    license_pre: "本文采用"
+    license_suf: "方式授权。"
+    terms: "转载请注明出处和本文链接，说明是否进行修改，不得用于商业用途，使用相同方式共享。"

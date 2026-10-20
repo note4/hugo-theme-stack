@@ -84,3 +84,11 @@ siteRunning:
         day: "日"
         hour: "時間"
         minute: "分"
+
+copyright:
+    original: "元記事著者"
+    reprint: "転載元："
+    badge_alt: "CC BY-NC-SA 4.0 ライセンス"
+    license_pre: "この記事は"
+    license_suf: "の下でライセンスされています。"
+    terms: "転載の際は出典とリンクを明記し、改変の有無を示してください。商用利用は不可、同じライセンスで共有してください。"

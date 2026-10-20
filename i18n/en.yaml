@@ -92,3 +92,11 @@ siteRunning:
         day: "days"
         hour: "hours"
         minute: "minutes"
+
+copyright:
+    original: "Content originally from"
+    reprint: "Reprinted from:"
+    badge_alt: "CC BY-NC-SA 4.0 Statement"
+    license_pre: "Licensed under"
+    license_suf: "."
+    terms: "Please credit the source and link to this article, indicate if changes were made, and share under the same non-commercial terms."
