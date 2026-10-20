@@ -72,3 +72,19 @@ footer:
 
     designedBy:
         other: Theme {{ .Theme }} gestaltet von {{ .DesignedBy }}
+
+custom:
+    links:
+        title:
+            other: Freunde-Links
+
+siteRunning:
+    prefix: "Diese Website läuft seit"
+    suffix: "!"
+    stop: "Gestoppt seit"
+    units:
+        year: "Jahren"
+        month: "Monaten"
+        day: "Tagen"
+        hour: "Stunden"
+        minute: "Minuten"
