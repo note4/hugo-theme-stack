@@ -68,3 +68,19 @@ footer:
 
     designedBy:
         other: テーマ {{ .Theme }} は {{ .DesignedBy }} によって設計されています。
+
+custom:
+    links:
+        title:
+            other: 友情リンク
+
+siteRunning:
+    prefix: "本サイトは"
+    suffix: "稼働しています！"
+    stop: "更新停止"
+    units:
+        year: "年"
+        month: "ヶ月"
+        day: "日"
+        hour: "時間"
+        minute: "分"
